@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome luci-app-adguardhome
+#git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome luci-app-adguardhome
 
 #安装和更新软件包
 UPDATE_PACKAGE() {
