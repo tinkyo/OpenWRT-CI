@@ -36,12 +36,6 @@ jobs:
         echo "--------------------------硬盘信息--------------------------"
         echo "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l)" && df -hT
 
-    
-    - name: Run Diy Script(执行自定义脚本)
-      run: |      
-        echo "DIY_SCRIPT=$DIY_SCRIPT"
-        $GITHUB_WORKSPACE/$DIY_SCRIPT
-
     - name: Initialization Environment(初始化环境)
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -105,12 +99,12 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
-    
-    - name: Run Diy Script(执行自定义脚本)
-      run: |
-        cd $OPENWRT_PATH        
-        echo "DIY_SCRIPT=$DIY_SCRIPT"
-        sh $DIY_SCRIPT
+        sed -i '/\/clash_/d; /.dat/d' scripts/preset-clash-core.sh
+        chmod +x $GITHUB_WORKSPACE/scripts/*.sh
+        chmod +x $DIY_SCRIPT
+        cd $OPENWRT_PATH
+        $GITHUB_WORKSPACE/$DIY_SCRIPT
+        $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_KERNEL
 
     - name: Download DL Package(下载DL软件包)
       run: |
