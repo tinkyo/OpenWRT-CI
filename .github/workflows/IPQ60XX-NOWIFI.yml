@@ -40,7 +40,7 @@ jobs:
     - name: Run Diy Script(执行自定义脚本)
       run: |      
         echo "DIY_SCRIPT=$DIY_SCRIPT"
-        sh $DIY_SCRIPT
+        $GITHUB_WORKSPACE/$DIY_SCRIPT
 
     - name: Initialization Environment(初始化环境)
       env:
