@@ -36,6 +36,13 @@ jobs:
         echo "--------------------------硬盘信息--------------------------"
         echo "硬盘数量：$(ls /dev/sd* | grep -v [1-9] | wc -l)" && df -hT
 
+    
+    - name: Run Diy Script(执行自定义脚本)
+      run: |
+        cd $OPENWRT_PATH        
+        echo "DIY_SCRIPT=$DIY_SCRIPT"
+        sh $DIY_SCRIPT
+
     - name: Initialization Environment(初始化环境)
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -104,7 +111,7 @@ jobs:
       run: |
         cd $OPENWRT_PATH        
         echo "DIY_SCRIPT=$DIY_SCRIPT"
-        $DIY_SCRIPT
+        sh $DIY_SCRIPT
 
     - name: Download DL Package(下载DL软件包)
       run: |
