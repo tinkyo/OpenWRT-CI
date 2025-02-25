@@ -1,4 +1,4 @@
-name: Arthur&Athena-6.12
+name: JD-AX1800-Pro
 
 on:
   workflow_dispatch:
@@ -9,13 +9,13 @@ on:
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: kernel-6.12
-  CONFIG_FILE: configs/Arthur&Athena.config
+  CONFIG_FILE: configs/JD-AX1800-Pro.config
   DIY_SCRIPT: scripts/diy-script.sh
   CLASH_KERNEL: amd64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: Arthur&Athena-6.12
+  FIRMWARE_TAG: JD-AX1800-Pro
   TZ: Asia/Shanghai
 
 jobs:
@@ -176,7 +176,7 @@ jobs:
             - 💻 这是 ${{ env.FIRMWARE_TAG }} 平台使用的 OpenWrt 固件
             - ⚽ 固件源码: ${{ env.REPO_URL }}
             - 💝 源码分支: ${{ env.REPO_BRANCH }}
-            - 🌐 默认地址: **192.168.2.1**
+            - 🌐 默认地址: **192.168.1.1**
             - 🔑 默认密码: 无
             ### 🧊 固件版本
             - 固件内核版本：**${{ env.VERSION_KERNEL }}**
