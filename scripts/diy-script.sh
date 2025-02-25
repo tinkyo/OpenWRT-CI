@@ -1,6 +1,9 @@
 # 修改默认IP & 固件名称
 #sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
-#sed -i "s/hostname='.*'/hostname='Roc'/g" package/base-files/files/bin/config_generate
+sed -i "s/hostname='.*'/hostname='Ooya'/g" package/base-files/files/bin/config_generate
+
+# TTYD 免登录
+sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
 # 移除要替换的包
 rm -rf feeds/packages/net/mosdns
