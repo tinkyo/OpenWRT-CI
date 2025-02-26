@@ -1,4 +1,4 @@
-name: Arthur&Athena-6.12
+name: Test
 
 on:
   workflow_dispatch:
@@ -9,13 +9,13 @@ on:
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: kernel-6.12
-  CONFIG_FILE: configs/Arthur&Athena.config
+  CONFIG_FILE: configs/test.config
   DIY_SCRIPT: scripts/diy-script.sh
   CLASH_KERNEL: amd64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: Arthur&Athena-6.12
+  FIRMWARE_TAG: Test
   TZ: Asia/Shanghai
 
 jobs:
@@ -171,12 +171,12 @@ jobs:
           artifacts: ${{ env.FIRMWARE_PATH }}/*
           body: |
             **This is OpenWrt Firmware for ${{ env.FIRMWARE_TAG }}** (6.12内核分支，欢迎下载测试！)
-            ### 📒 固件信息(带WIFI)
-            - 这是带WIFI以及NSS的6.12内核固件，默认主题为Argon；该固件在LibWrt的基础上，添加了额外的软件包cpufreq、ddns、ttyd、upnp、wol、samba4、vlmcsd、aria2、autoreboot、uhttpd、wifischedule、frps、frpc、diskman、hd-idle、banip、acme、arpbind、usb-printer、homeproxy、alist、adguardhome，并添加了若干工具，具体详见Arthur&Athena.config。
+            ### 📒 固件信息(无WIFI)
+            - 这是无WIFI，含NSS的6.12内核固件，默认主题为Argon；该固件在LibWrt的基础上，添加了额外的软件包cpufreq、ddns-go、ttyd、wol-plus、alist、openclash、adguardhome、mosdns，并添加了若干工具，具体详见${{ env.CONFIG_FILE}}。
             - 💻 这是 ${{ env.FIRMWARE_TAG }} 平台使用的 OpenWrt 固件
             - ⚽ 固件源码: ${{ env.REPO_URL }}
             - 💝 源码分支: ${{ env.REPO_BRANCH }}
-            - 🌐 默认地址: **192.168.2.1**
+            - 🌐 默认地址: **192.168.1.1**
             - 🔑 默认密码: 无
             ### 🧊 固件版本
             - 固件内核版本：**${{ env.VERSION_KERNEL }}**
