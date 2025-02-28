@@ -31,7 +31,8 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         with:
           limit-access-to-actor: true  # 仅允许仓库所有者连接
-          
+          args: --pw ${{ env.SSH_PASSWORD }}  # 设置自定义密码
+
       - name: Check Server Performance(检查服务器性能)
         run: |
           echo "警告⚠"
