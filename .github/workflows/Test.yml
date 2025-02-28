@@ -29,8 +29,9 @@ jobs:
         if: env.SSH_ACTIONS == 'true'
         uses: mxschmitt/action-tmate@v3
         with:
+          sudo: true
+          install-dependencies: true
           limit-access-to-actor: true  # 仅允许仓库所有者连接
-          args: --pw 1986183  # 设置自定义密码
 
       - name: Check Server Performance(检查服务器性能)
         run: |
