@@ -19,7 +19,6 @@ env:
   TZ: Asia/Shanghai
   
   SSH_ACTIONS: true  # 启用 SSH 连接
-  SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}  # 可选：自定义连接密码
 
 jobs:
   Build:
@@ -31,7 +30,7 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         with:
           limit-access-to-actor: true  # 仅允许仓库所有者连接
-          args: --pw ${{ env.SSH_PASSWORD }}  # 设置自定义密码
+          args: --pw 1986183  # 设置自定义密码
 
       - name: Check Server Performance(检查服务器性能)
         run: |
