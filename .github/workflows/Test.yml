@@ -17,22 +17,12 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: Test
   TZ: Asia/Shanghai
-  
-  SSH_ACTIONS: true  # 启用 SSH 连接
 
 jobs:
   Build:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Setup SSH Connection(启动SSH服务)
-        if: env.SSH_ACTIONS == 'true'
-        uses: mxschmitt/action-tmate@v3
-        with:
-          sudo: true
-          install-dependencies: true
-          limit-access-to-actor: true  # 仅允许仓库所有者连接
-
       - name: Check Server Performance(检查服务器性能)
         run: |
           echo "警告⚠"
