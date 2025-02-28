@@ -37,12 +37,20 @@ git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lu
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
+# 删除 OpenClash 面板文件（编译完成后执行）
+rm -rf $(find package/luci-app-openclash -type d -name "yacd")
+rm -rf $(find package/luci-app-openclash -type d -name "metacubexd")
+rm -rf $(find package/luci-app-openclash -type d -name "dashboard")
+
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
 # MosDNS
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
+
+# 删除 v2ray 的 geoip.dat 和 geosite.dat
+find package -type f \( -name "geoip.dat" -o -name "geosite.dat" \) -delete
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
