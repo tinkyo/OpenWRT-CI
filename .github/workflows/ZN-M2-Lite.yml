@@ -1,4 +1,4 @@
-name: Test
+name: ZN-M2-Lite
 
 on:
   workflow_dispatch:
@@ -9,13 +9,13 @@ on:
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: kernel-6.12
-  CONFIG_FILE: configs/test.config
+  CONFIG_FILE: configs/ZN-M2-Lite.config
   DIY_SCRIPT: scripts/diy-script-ip.sh
   CLASH_KERNEL: amd64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: Test
+  FIRMWARE_TAG: ZN-M2-Lite
   TZ: Asia/Shanghai
 
 jobs:
