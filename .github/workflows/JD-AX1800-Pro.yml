@@ -47,8 +47,8 @@ jobs:
           sudo -E apt-get -y update
           echo "sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true"
           sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true
-          echo "sudo -E apt-get -y install $(curl -fsSL is.gd/depends_ubuntu_2204)"
-          sudo -E apt-get -y install $(curl -fsSL is.gd/depends_ubuntu_2204)
+          #echo "sudo -E apt-get -y install $(curl -fsSL is.gd/depends_ubuntu_2204)"
+          #sudo -E apt-get -y install $(curl -fsSL is.gd/depends_ubuntu_2204)
           echo "sudo -E systemctl daemon-reload"
           sudo -E systemctl daemon-reload
           echo "sudo -E apt-get -y autoremove --purge"
