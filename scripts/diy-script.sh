@@ -1,5 +1,5 @@
 # 修改默认IP & 固件名称
-sed -i 's/192.168.1.1/192.168.123.1/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/192.168.123.1/g' package/base-files/files/bin/config_generate
 sed -i "s/hostname='.*'/hostname='Ooya'/g" package/base-files/files/bin/config_generate
 
 # TTYD 免登录
