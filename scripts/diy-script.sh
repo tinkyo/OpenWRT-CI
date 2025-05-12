@@ -21,22 +21,19 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-# Alist & AdGuardHome & WolPlus & AriaNg & 集客无线AC控制器 & Lucky
-git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome
+# 集客无线AC控制器 & Lucky
 git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-vlmcsd
+git_sparse_clone main https://github.com/kenzok8/small-package luci-app-uptimekuma
+git clone https://github.com/sirpdboy/luci-app-vnt.git package/vnt
+
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
-
-# MosDNS
-git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
-
-# Alist
-git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
