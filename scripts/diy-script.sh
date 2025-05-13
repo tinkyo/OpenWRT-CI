@@ -23,12 +23,14 @@ function git_sparse_clone() {
 
 # 集客无线AC控制器 & Lucky
 git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
+
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-vlmcsd
-git clone https://github.com/lmq8267/luci-app-vnt.git package/vnt
+
+git_sparse_clone main https://github.com/lmq8267/luci-app-vnt.git vnt vnts luci-app-vnt
 
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
