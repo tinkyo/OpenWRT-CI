@@ -28,7 +28,7 @@ git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lu
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-vlmcsd
-git clone https://github.com/sirpdboy/luci-app-vnt.git package/vnt
+git clone https://github.com/lmq8267/luci-app-vnt.git package/vnt
 
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
