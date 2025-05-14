@@ -30,7 +30,7 @@ git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclas
 
 git_sparse_clone main https://github.com/kenzok8/small-package luci-app-vlmcsd
 
-git_sparse_clone main https://github.com/lmq8267/luci-app-vnt.git vnt vnts luci-app-vnt
+git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 
 # msd_lite
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
