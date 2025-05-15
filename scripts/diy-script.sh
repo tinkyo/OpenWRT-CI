@@ -35,6 +35,9 @@ git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
 git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
 
+git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
+git clone --depth=1 https://github.com/sirpdboy/luci-app-watchdog package/watchdog
+
 # MosDNS
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
