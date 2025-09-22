@@ -1,21 +1,20 @@
-name: ZN-M2
+name: IPQ60XX-6.12-NOWIFI
 
 on:
   workflow_dispatch:
-  workflow_call:
-  # schedule:
-  #   - cron: 0 20 * * *
+#  schedule:
+#    - cron: 0 19 * * *
 
 env:
   REPO_URL: https://github.com/LiBwrt/openwrt-6.x.git
   REPO_BRANCH: k6.12-nss
-  CONFIG_FILE: configs/ZN-M2.config
+  CONFIG_FILE: configs/ipq60xx-6.12-nowifi.config
   DIY_SCRIPT: scripts/diy-script.sh
   CLASH_KERNEL: amd64
   CACHE_TOOLCHAIN: true
   UPLOAD_BIN_DIR: false
   FIRMWARE_RELEASE: true
-  FIRMWARE_TAG: ZN-M2
+  FIRMWARE_TAG: IPQ60XX-6.12-NOWIFI
   TZ: Asia/Shanghai
 
 jobs:
