@@ -113,6 +113,24 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
+      - name: Init Swap
+        run: |
+          sudo fallocate -l 6G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake clang flex bison gawk \
+            gettext git libncurses5-dev libssl-dev python3 unzip zlib1g-dev file wget curl
+
+      - name: Build OpenClash
+        run: |
+          make package/openclash/clean
+          make package/openclash/compile -j$(nproc) V=s
+
       - name: Compile Firmware(开始编译固件)
         id: compile
         run: |
