@@ -46,7 +46,3 @@ git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-ali
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-
-make package/feeds/packages/rust/{clean,download,prepare} -j1 V=s
-make package/luci-app-openclash/clean
-make package/luci-app-openclash/compile -j1 V=s
