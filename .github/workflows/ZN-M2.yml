@@ -52,16 +52,11 @@ jobs:
           sudo -E timedatectl set-timezone "$TZ"
           
           df -hT
-                    
-          sudo -E fallocate -l 6G /swapfile
-          sudo -E chmod 600 /swapfile
-          sudo -E mkswap /swapfile
-          sudo -E swapon /swapfile
 
       - name: Combine Disks(合并磁盘)
         uses: easimon/maximize-build-space@master
         with:
-          swap-size-mb: 1024
+          swap-size-mb: 6144
           temp-reserve-mb: 100
           root-reserve-mb: 1024
 
