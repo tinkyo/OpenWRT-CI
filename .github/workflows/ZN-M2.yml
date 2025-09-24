@@ -63,8 +63,6 @@ jobs:
 
       - name: Clone Source Code(克隆源代码)
         run: |
-          df -hT
-          echo $GITHUB_WORKSPACE
           df -hT $GITHUB_WORKSPACE
           git clone --depth 1 -b $REPO_BRANCH $REPO_URL openwrt
           cd openwrt
