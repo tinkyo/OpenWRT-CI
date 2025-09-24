@@ -50,8 +50,6 @@ jobs:
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get -y clean
           sudo -E timedatectl set-timezone "$TZ"
-          
-          df -hT
 
       - name: Combine Disks(合并磁盘)
         uses: easimon/maximize-build-space@master
@@ -65,6 +63,8 @@ jobs:
 
       - name: Clone Source Code(克隆源代码)
         run: |
+          df -hT
+          echo $GITHUB_WORKSPACE
           df -hT $GITHUB_WORKSPACE
           git clone --depth 1 -b $REPO_BRANCH $REPO_URL openwrt
           cd openwrt
