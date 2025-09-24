@@ -22,9 +22,11 @@ function git_sparse_clone() {
 }
 
 # 集客无线AC控制器 & Lucky
-git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome luci-app-openclash luci-app-vlmcsd
+git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome luci-app-vlmcsd
 git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
+
+git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 
@@ -44,5 +46,5 @@ git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-ali
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-make package/openclash/clean
-make package/openclash/compile -j$(nproc) V=s
+make package/luci-app-openclash/clean
+make package/luci-app-openclash/compile -j$(nproc) V=s
