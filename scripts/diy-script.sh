@@ -44,5 +44,7 @@ git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mo
 # Alist
 git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
+make package/host/rust/compile
+
 ./scripts/feeds update -a
 ./scripts/feeds install -a
