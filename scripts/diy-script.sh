@@ -44,29 +44,5 @@ git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mo
 # Alist
 git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
-
 ./scripts/feeds update -a
 ./scripts/feeds install -a
-
-# =========================================
-# 删除无用文件（编译 rootfs 阶段）
-# =========================================
-echo ">>> 开始清理固件中的无用文件 ..."
-
-ROOTDIR=$(find "$PWD/staging_dir/target-*" -type d -name "root-*")
-
-# 删除 OpenClash UI 文件夹
-for dir in dashboard yacd zashboard; do
-    if [ -d "$ROOTDIR/usr/share/openclash/ui/$dir" ]; then
-        rm -rf "$ROOTDIR/usr/share/openclash/ui/$dir"
-        echo "已删除 $ROOTDIR/usr/share/openclash/ui/$dir"
-    fi
-done
-
-# 删除 AdGuardHome 二进制
-if [ -f "$ROOTDIR/usr/bin/adguardhome" ]; then
-    rm -f "$ROOTDIR/usr/bin/adguardhome"
-    echo "已删除 $ROOTDIR/usr/bin/adguardhome"
-fi
-
-echo ">>> 清理完成"
