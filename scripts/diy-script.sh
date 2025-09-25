@@ -27,7 +27,7 @@ git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-
 git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
 
-git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
+git_sparse_clone master https://github.com/tinkyo/OpenClash luci-app-openclash
 
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 
