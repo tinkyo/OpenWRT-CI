@@ -28,13 +28,6 @@ git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
-ls -l package/luci-app-openclash/root/usr/share/openclash/ui
-# 移除多余文件
-rm -rf package/luci-app-openclash/root/usr/share/openclash/ui/dashboard/
-rm -rf package/luci-app-openclash/root/usr/share/openclash/ui/yacd/
-rm -rf package/luci-app-openclash/root/usr/share/openclash/ui/zashboard/
-
-ls -l package/luci-app-openclash/root/usr/share/openclash/ui
 
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 
@@ -54,3 +47,13 @@ git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-ali
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+ls -l files/usr/share/openclash/ui
+# 移除多余文件
+rm -rf files/usr/share/openclash/ui/dashboard/
+rm -rf files/usr/share/openclash/ui/yacd/
+rm -rf files/usr/share/openclash/ui/zashboard/
+
+ls -l files/usr/share/openclash/ui
+
+ls -l files/usr/bin
