@@ -110,29 +110,6 @@ jobs:
           make download -j8
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
-          
-          # =========================================
-          # 删除无用文件（编译 rootfs 阶段）
-          # =========================================
-            echo ">>> 开始清理固件中的无用文件 ..."
-            
-            ROOTDIR=$(find "$PWD/staging_dir/target-*" -type d -name "root-*")
-            
-            # 删除 OpenClash UI 文件夹
-            for dir in dashboard yacd zashboard; do
-            if [ -d "$ROOTDIR/usr/share/openclash/ui/$dir" ]; then
-            rm -rf "$ROOTDIR/usr/share/openclash/ui/$dir"
-            echo "已删除 $ROOTDIR/usr/share/openclash/ui/$dir"
-            fi
-            done
-            
-            # 删除 AdGuardHome 二进制
-            if [ -f "$ROOTDIR/usr/bin/adguardhome" ]; then
-            rm -f "$ROOTDIR/usr/bin/adguardhome"
-            echo "已删除 $ROOTDIR/usr/bin/adguardhome"
-            fi
-            
-            echo ">>> 清理完成"
 
       - name: Compile Firmware(开始编译固件)
         id: compile
@@ -143,6 +120,17 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           echo "DATE=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
           echo "FILE_DATE=$(date +"%Y.%m.%d")" >> $GITHUB_ENV
+
+      - name: Remove Unwanted Files(清理无用文件)
+        if: steps.compile.outputs.status == 'success'
+        run: |
+          ROOTDIR=$(find "$OPENWRT_PATH/build_dir/target-*" -type d -name "root-*")
+          echo ">>> 开始清理固件中的无用文件 ..."
+          for dir in dashboard yacd zashboard; do
+            rm -rf "$ROOTDIR/usr/share/openclash/ui/$dir" && echo "已删除 $dir"
+          done
+          rm -f "$ROOTDIR/usr/bin/adguardhome" && echo "已删除 AdGuardHome"
+          echo ">>> 清理完成"
 
       - name: Check Space Usage(检查空间使用情况)
         if: (!cancelled())
