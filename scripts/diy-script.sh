@@ -48,12 +48,25 @@ git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-ali
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 
-ls -l files/usr/share/openclash/ui
-# 移除多余文件
-rm -rf files/usr/share/openclash/ui/dashboard/
-rm -rf files/usr/share/openclash/ui/yacd/
-rm -rf files/usr/share/openclash/ui/zashboard/
+# =========================================
+# 删除无用文件（编译 rootfs 阶段）
+# =========================================
+echo ">>> 开始清理固件中的无用文件 ..."
 
-ls -l files/usr/share/openclash/ui
+ROOTDIR=$(find "$PWD/staging_dir/target-*" -type d -name "root-*")
 
-ls -l files/usr/bin
+# 删除 OpenClash UI 文件夹
+for dir in dashboard yacd zashboard; do
+    if [ -d "$ROOTDIR/usr/share/openclash/ui/$dir" ]; then
+        rm -rf "$ROOTDIR/usr/share/openclash/ui/$dir"
+        echo "已删除 $ROOTDIR/usr/share/openclash/ui/$dir"
+    fi
+done
+
+# 删除 AdGuardHome 二进制
+if [ -f "$ROOTDIR/usr/bin/adguardhome" ]; then
+    rm -f "$ROOTDIR/usr/bin/adguardhome"
+    echo "已删除 $ROOTDIR/usr/bin/adguardhome"
+fi
+
+echo ">>> 清理完成"
