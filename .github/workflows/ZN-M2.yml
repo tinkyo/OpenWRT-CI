@@ -42,11 +42,29 @@ jobs:
         run: |
           sudo -E apt-get -y update
           sudo -E apt-get -y install $(curl -fsSL is.gd/depends_ubuntu_2204)
-          sudo -E apt-get -y install build-essential cmake clang flex bison gawk gettext git libncurses5-dev libssl-dev python3 unzip zlib1g-dev file wget curl
+          sudo -E apt-get install -y build-essential cmake clang flex bison gawk gettext git libncurses5-dev libssl-dev python3 python3-pip unzip zlib1g-dev file wget curl pkg-config \
+              libboost-system-dev libboost-filesystem-dev libboost-thread-dev libboost-chrono-dev libboost-program-options-dev libboost-regex-dev libboost-date-time-dev libboost-atomic-dev
+          
+          echo "=== 安装 Rust 工具链 ==="
+          if ! command -v rustc &> /dev/null; then
+              curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+              source $HOME/.cargo/env
+          else
+              echo "Rust 已安装: $(rustc --version)"
+          fi
+
+          echo "=== 更新 pip 并安装 Python 构建工具 ==="
+          python3 -m pip install --upgrade pip setuptools wheel
+          
           sudo -E systemctl daemon-reload
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get -y clean
           sudo -E timedatectl set-timezone "$TZ"
+          
+          echo "=== 构建环境准备完成 ==="
+          rustc --version
+          cargo --version
+          python3 --version
 
       - name: Combine Disks(合并磁盘)
         uses: easimon/maximize-build-space@master
