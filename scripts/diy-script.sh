@@ -6,8 +6,8 @@ sed -i "s/hostname='.*'/hostname='Ooya'/g" package/base-files/files/bin/config_g
 sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.config
 
 # 移除要替换的包
-rm -rf feeds/packages/net/mosdns
 rm -rf feeds/packages/net/msd_lite
+rm -rf feeds/packages/net/mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/adguardhome
 rm -rf feeds/packages/lang/rust
@@ -22,24 +22,11 @@ function git_sparse_clone() {
   cd .. && rm -rf $repodir
 }
 
-# 集客无线AC控制器 & Lucky
-git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome luci-app-vlmcsd
-git clone --depth=1 https://github.com/lwb1978/openwrt-gecoosac package/openwrt-gecoosac
-
-git clone --depth=1 https://github.com/sbwml/luci-app-ddns-go package/luci-app-ddns-go
-
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
-
+git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
-
+git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
 git clone --depth=1 https://github.com/animegasan/luci-app-wolplus package/luci-app-wolplus
-
-# msd_lite
-git clone --depth=1 https://github.com/ximiTech/luci-app-msd_lite package/luci-app-msd_lite
-git clone --depth=1 https://github.com/ximiTech/msd_lite package/msd_lite
-
-git clone --depth=1 https://github.com/sirpdboy/luci-app-timecontrol package/luci-app-timecontrol
-git clone --depth=1 https://github.com/sirpdboy/luci-app-watchdog package/watchdog
 
 # MosDNS
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
