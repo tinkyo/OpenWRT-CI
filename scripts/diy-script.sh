@@ -29,7 +29,11 @@ git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 git clone --depth=1 https://github.com/animegasan/luci-app-wolplus package/luci-app-wolplus
 
 # MosDNS
-git_sparse_clone main https://github.com/sbwml/luci-app-mosdns v2dat mosdns luci-app-mosdns
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
+rm -rf feeds/packages/net/v2ray-geodata
+git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
 # Alist
 git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
