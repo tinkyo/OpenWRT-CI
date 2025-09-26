@@ -24,12 +24,12 @@ function git_sparse_clone() {
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
 git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome
+git_sparse_clone main https://github.com/sirpdboy/luci-app-ddns-go ddns-go luci-app-ddns-go
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
-git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
 git clone --depth=1 https://github.com/animegasan/luci-app-wolplus package/luci-app-wolplus
 
 # MosDNS
-git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
+git_sparse_clone main https://github.com/sbwml/luci-app-mosdns v2dat mosdns luci-app-mosdns
 
 # Alist
 git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
