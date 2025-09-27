@@ -23,18 +23,16 @@ function git_sparse_clone() {
 }
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
-git_sparse_clone main https://github.com/kenzok8/small-package adguardhome luci-app-adguardhome
+git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git_sparse_clone main https://github.com/sirpdboy/luci-app-ddns-go ddns-go luci-app-ddns-go
+git_sparse_clone main https://github.com/VIKINGYFY/packages luci-app-wolplus
 git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
-git clone --depth=1 https://github.com/animegasan/luci-app-wolplus package/luci-app-wolplus
 
 # MosDNS
-rm -rf feeds/packages/net/v2ray-geodata
-git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
 # Alist
-git clone --depth=1 https://github.com/sbwml/luci-app-alist package/luci-app-alist
+git clone --depth=1 https://github.com/sbwml/luci-app-openlist2 package/openlist
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
