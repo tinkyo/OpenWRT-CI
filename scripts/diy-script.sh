@@ -10,7 +10,6 @@ rm -rf feeds/packages/net/msd_lite
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/adguardhome
-rm -rf feeds/packages/lang/rust
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
@@ -30,9 +29,6 @@ git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 
 # MosDNS
 git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
-
-# Alist
-git clone --depth=1 https://github.com/sbwml/luci-app-openlist2 package/openlist
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
