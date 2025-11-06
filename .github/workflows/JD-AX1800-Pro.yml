@@ -93,7 +93,7 @@ jobs:
         if: env.USE_CACHE == 'true'
         uses: actions/cache@v4
         with:
-          path: $OPENWRT_PATH/dl
+          path: ${{ env.OPENWRT_PATH }}/dl
           key: ${{ runner.os }}-openwrt-dl-${{ env.REPO_BRANCH }}
           restore-keys: |
             ${{ runner.os }}-openwrt-dl-
@@ -103,8 +103,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            $OPENWRT_PATH/build_dir
-            $OPENWRT_PATH/staging_dir
+            ${{ env.OPENWRT_PATH }}/build_dir
+            ${{ env.OPENWRT_PATH }}/staging_dir
           key: ${{ runner.os }}-openwrt-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
           restore-keys: |
             ${{ runner.os }}-openwrt-
