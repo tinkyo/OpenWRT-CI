@@ -2,6 +2,11 @@ name: JD-AX1800-Pro
 
 on:
   workflow_dispatch:
+    inputs:
+      use_cache:
+        description: "是否使用缓存"
+        required: true
+        default: "true"
 #  schedule:
 #    - cron: 0 19 * * *
 
@@ -16,7 +21,7 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: JD-AX1800-Pro
   TZ: Asia/Shanghai
-  CFLAGS: "-nostdinc"
+  USE_CACHE: ${{ github.event.inputs.use_cache || 'true' }}
 
 jobs:
   Build:
@@ -83,6 +88,28 @@ jobs:
           echo "DEVICE_TARGET=$DEVICE_TARGET" >> $GITHUB_ENV
           DEVICE_SUBTARGET=$(cat .config | grep CONFIG_TARGET_SUBTARGET | awk -F '"' '{print $2}')
           echo "DEVICE_SUBTARGET=$DEVICE_SUBTARGET" >> $GITHUB_ENV
+
+      # ✅ 新增：缓存 dl 源码包
+      - name: Cache DL packages(缓存下载包)
+        if: env.USE_CACHE == 'true'
+        uses: actions/cache@v4
+        with:
+          path: openwrt/dl
+          key: ${{ runner.os }}-openwrt-dl-${{ env.REPO_BRANCH }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-dl-
+
+      # ✅ 新增：缓存构建目录
+      - name: Cache Build & Staging(缓存编译目录)
+        if: env.USE_CACHE == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            openwrt/build_dir
+            openwrt/staging_dir
+          key: ${{ runner.os }}-openwrt-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-
 
       - name: Cache Toolchain(缓存工具链)
         if: env.CACHE_TOOLCHAIN == 'true'
