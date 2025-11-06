@@ -89,33 +89,37 @@ jobs:
           DEVICE_SUBTARGET=$(cat .config | grep CONFIG_TARGET_SUBTARGET | awk -F '"' '{print $2}')
           echo "DEVICE_SUBTARGET=$DEVICE_SUBTARGET" >> $GITHUB_ENV
 
-      - name: Cache DL packages(缓存下载包)
+      - name: Cache DL packages (缓存下载包)
         if: env.USE_CACHE == 'true'
         uses: actions/cache@v4
         with:
           path: ${{ env.OPENWRT_PATH }}/dl
-          key: ${{ runner.os }}-openwrt-dl-${{ env.REPO_BRANCH }}
+          key: ${{ runner.os }}-openwrt-dl-${{ env.REPO_BRANCH }}-${{ hashFiles('feeds.conf.default') }}
           restore-keys: |
             ${{ runner.os }}-openwrt-dl-
 
-      - name: Cache Build & Staging(缓存编译目录)
+      - name: Cache Toolchain & Staging (缓存工具链)
+        if: env.CACHE_TOOLCHAIN == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.OPENWRT_PATH }}/staging_dir
+            ${{ env.OPENWRT_PATH }}/build_dir/host
+            ${{ env.OPENWRT_PATH }}/build_dir/toolchain-*
+          key: ${{ runner.os }}-openwrt-toolchain-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}-${{ hashFiles('feeds.conf.default','configs/*.config') }}
+          restore-keys: |
+            ${{ runner.os }}-openwrt-toolchain-
+
+      - name: Cache Build Output (缓存编译输出)
         if: env.USE_CACHE == 'true'
         uses: actions/cache@v4
         with:
           path: |
-            ${{ env.OPENWRT_PATH }}/build_dir
-            ${{ env.OPENWRT_PATH }}/staging_dir
-          key: ${{ runner.os }}-openwrt-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
+            ${{ env.OPENWRT_PATH }}/build_dir/target-*
+            ${{ env.OPENWRT_PATH }}/bin
+          key: ${{ runner.os }}-openwrt-build-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}-${{ hashFiles('configs/*.config') }}
           restore-keys: |
-            ${{ runner.os }}-openwrt-
-
-      - name: Cache Toolchain(缓存工具链)
-        if: env.CACHE_TOOLCHAIN == 'true'
-        uses: HiGarfield/cachewrtbuild@main
-        with:
-          ccache: false
-          mixkey: ${{ env.SOURCE_REPO }}-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
-          prefix: ${{ env.OPENWRT_PATH }}
+            ${{ runner.os }}-openwrt-build-
 
       - name: Install Feeds(安装feeds)
         run: |
