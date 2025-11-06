@@ -16,6 +16,7 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: JD-AX1800-Pro
   TZ: Asia/Shanghai
+  CFLAGS: "-nostdinc"
 
 jobs:
   Build:
