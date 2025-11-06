@@ -9,6 +9,7 @@ sed -i 's|/bin/login|/bin/login -f root|g' feeds/packages/utils/ttyd/files/ttyd.
 rm -rf feeds/packages/net/mosdns
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/adguardhome
+rm -rf feeds/packages/lang/rust
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
