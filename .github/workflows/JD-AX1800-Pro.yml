@@ -88,7 +88,7 @@ jobs:
         uses: HiGarfield/cachewrtbuild@main
         with:
           ccache: true
-          mixkey: ${{ env.SOURCE_REPO }}-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}
+          mixkey: ${{ env.SOURCE_REPO }}-${{ env.REPO_BRANCH }}-${{ env.DEVICE_TARGET }}
           prefix: ${{ env.OPENWRT_PATH }}
 
       - name: Install Feeds(安装feeds)
