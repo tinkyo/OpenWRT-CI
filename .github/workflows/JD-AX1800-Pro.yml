@@ -113,6 +113,17 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
+      - name: Check Cache Size(检查缓存大小)
+        run: |
+          CACHE_SIZE=$(du -sm ${{ env.OPENWRT_PATH }}/staging_dir/toolchain-* 2>/dev/null | awk '{print $1}')
+          if [ -z "$CACHE_SIZE" ] || [ "$CACHE_SIZE" -lt 1000 ]; then
+            echo "❌ 工具链缓存无效，重新构建..."
+            cd ${{ env.OPENWRT_PATH }}
+            make toolchain/install -j$(nproc)
+          else
+            echo "✅ 工具链缓存有效: ${CACHE_SIZE} MB"
+          fi
+
       - name: Compile Firmware(开始编译固件)
         id: compile
         run: |
