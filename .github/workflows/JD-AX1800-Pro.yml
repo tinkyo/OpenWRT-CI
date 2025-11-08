@@ -113,6 +113,10 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
+      - name: Fix libxcrypt build issue
+        run: |
+          sed -i '$a TARGET_CFLAGS += -Wno-error=pedantic' package/libs/xcrypt/Makefile
+
       - name: Compile Firmware(开始编译固件)
         id: compile
         run: |
