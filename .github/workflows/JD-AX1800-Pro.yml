@@ -113,10 +113,16 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
-      - name: Fix libxcrypt fortify compile issue
+      - name: Patch libxcrypt build flags
         run: |
-          echo 'export CFLAGS="$CFLAGS -Wno-error=pedantic -Wno-error=format-security"' >> $GITHUB_ENV
-          echo 'export CPPFLAGS="$CPPFLAGS -U_FORTIFY_SOURCE"' >> $GITHUB_ENV
+          FILE_PATH=$(find openwrt/ -type f -path "*/libs/xcrypt/libxcrypt/Makefile" | head -n 1 || true)
+          if [ -n "$FILE_PATH" ]; then
+            echo "🔧 Found libxcrypt Makefile at: $FILE_PATH"
+            if ! grep -q "Wno-error=pedantic" "$FILE_PATH"; then
+              echo "" >> "$FILE_PATH"
+              echo "TARGET_CFLAGS += -Wno-error=pedantic -Wno-error=format-security" >> "$FILE_PATH"
+            fi
+          fi
 
       - name: Compile Firmware(开始编译固件)
         id: compile
