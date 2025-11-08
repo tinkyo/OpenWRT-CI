@@ -113,9 +113,23 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
-      - name: Fix libxcrypt build issue
+      - name: Patch libxcrypt build flags (fix fortify pedantic error)
         run: |
-          sed -i '$a TARGET_CFLAGS += -Wno-error=pedantic' package/libs/xcrypt/Makefile
+          # 自动检测 libxcrypt Makefile 路径
+          FILE_PATH=$(find openwrt/ -type f -path "*/libs/xcrypt/Makefile" | head -n 1 || true)
+          if [ -n "$FILE_PATH" ]; then
+            echo "🔧 Found libxcrypt Makefile at: $FILE_PATH"
+            # 检查是否已打过补丁，避免重复添加
+            if ! grep -q "Wno-error=pedantic" "$FILE_PATH"; then
+              echo "🔧 Adding -Wno-error=pedantic to $FILE_PATH"
+              echo "" >> "$FILE_PATH"
+              echo "TARGET_CFLAGS += -Wno-error=pedantic -Wno-error=format-security" >> "$FILE_PATH"
+            else
+              echo "✅ Patch already applied, skipping"
+            fi
+          else
+            echo "⚠️ libxcrypt Makefile not found, skipping patch"
+          fi
 
       - name: Compile Firmware(开始编译固件)
         id: compile
