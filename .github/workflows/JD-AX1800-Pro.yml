@@ -113,12 +113,17 @@ jobs:
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
 
+      - name: Fix libxcrypt fortify compile issue
+        run: |
+          echo 'export CFLAGS="$CFLAGS -Wno-error=pedantic -Wno-error=format-security"' >> $GITHUB_ENV
+          echo 'export CPPFLAGS="$CPPFLAGS -U_FORTIFY_SOURCE"' >> $GITHUB_ENV
+
       - name: Compile Firmware(开始编译固件)
         id: compile
         run: |
           cd $OPENWRT_PATH
           echo -e "$(nproc) thread compile"
-          make package/libs/xcrypt/libxcrypt/compile EXTRA_CFLAGS="-Wno-error -Wno-pedantic"
+          make package/libs/xcrypt/libxcrypt/compile
           make -j$(nproc) || make -j1 || make -j1 V=s
           echo "status=success" >> $GITHUB_OUTPUT
           echo "DATE=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
