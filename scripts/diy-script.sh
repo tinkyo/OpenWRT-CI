@@ -21,13 +21,12 @@ function git_sparse_clone() {
 }
 
 git_sparse_clone master https://github.com/vernesong/OpenClash luci-app-openclash
+git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
+git clone --depth=1 https://github.com/gdy666/luci-app-lucky package/luci-app-lucky
+git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
 git clone --depth=1 https://github.com/kongfl888/luci-app-adguardhome package/luci-app-adguardhome
 git_sparse_clone main https://github.com/sirpdboy/luci-app-ddns-go ddns-go luci-app-ddns-go
 git_sparse_clone main https://github.com/VIKINGYFY/packages luci-app-wolplus
-git clone --depth=1 https://github.com/lmq8267/luci-app-vnt package/luci-app-vnt
-
-# MosDNS
-git clone --depth=1 https://github.com/sbwml/luci-app-mosdns package/luci-app-mosdns
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
